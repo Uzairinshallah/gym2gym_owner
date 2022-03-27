@@ -1,25 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-import '../models/Employee.dart';
+import '../models/employee_atten_model.dart';
 
 class AttendanceDetails extends DataGridSource {
-  AttendanceDetails({required List<Employee> employees}) {
+  AttendanceDetails({required List<EmpAttenModel> employees}) {
     dataGridRows = employees
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
               DataGridCell(
                   columnName: 'attendance id',
-                  value: Container( width: 110, child: Text(dataGridRow.attendance_id))),
-              DataGridCell(
-                  columnName: 'User id',
-                  value: Container(width: 110, child: Text(dataGridRow.user_id))),
-              DataGridCell(
-                  columnName: 'PKG ID',
-                  value: Container(width: 110, child: Text(dataGridRow.pkg_id))),
-              DataGridCell(columnName: 'Date ',
-                  value: Container(width: 110, child: Text(dataGridRow.date))),
-              DataGridCell(
-                  columnName: 'Charges', value: Container(width:110,child: Text(dataGridRow.charges))),
+                  value: dataGridRow.attendance_id),
+              DataGridCell(columnName: 'User id', value: dataGridRow.user_id),
+              DataGridCell(columnName: 'PKG ID', value: dataGridRow.pkg_id),
+              DataGridCell(columnName: 'Date ', value: dataGridRow.date),
+              DataGridCell(columnName: 'Charges', value: dataGridRow.charges),
             ]))
         .toList();
   }

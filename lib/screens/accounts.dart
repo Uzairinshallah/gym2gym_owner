@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym2gym_owner/screens/widthdraw_details.dart';
 
 import '../assets/CColors.dart';
 import 'homepage.dart';
@@ -29,15 +30,33 @@ class AccountsScreen extends StatelessWidget {
               ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Column(
             children: [
-              ButtonWidget(context, 'Balance', () {}),
-              Padding(
-                padding: const EdgeInsets.only(top: 12, bottom: 12),
-                child: ButtonWidget(context, 'Transactions', () {}),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ButtonWidget(context, 'Balance', () {}),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12, bottom: 12),
+                    child: ButtonWidget(context, 'Transactions', () {
+                      Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => WidthdrawDetails()));
+                    }),
+                  ),
+                ],
               ),
-              ButtonWidget(context, 'Expense', () {}),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ButtonWidget(context, 'Expense', () {}),
+
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12, bottom: 12),
+                    child: ButtonWidget(context, 'Widthdraw', () {}),
+                  ),
+                ],
+              ),
+
             ],
           ),
           Expanded(

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gym2gym_owner/main.dart';
 import 'package:gym2gym_owner/screens/SignupPage.dart';
 import 'package:gym2gym_owner/screens/accounts.dart';
-import 'package:gym2gym_owner/screens/customers.dart';
-import 'package:gym2gym_owner/screens/employees.dart';
+import 'package:gym2gym_owner/screens/customersDetails.dart';
+import 'package:gym2gym_owner/screens/employees_details.dart';
 import 'package:gym2gym_owner/screens/packages.dart';
 import 'package:gym2gym_owner/screens/timing.dart';
 
@@ -110,7 +110,7 @@ class Homepage extends StatelessWidget {
                             child: ButtonWidget(context, "Employees", (){
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const EmployeesScreen()),
+                                MaterialPageRoute(builder: (context) => const EmployeesDetailsScreen()),
                               );
                             },),
                           ),
