@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gym2gym_owner/classes/customers_table.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -15,13 +16,13 @@ class _CustomersScreenState extends State<CustomersScreen> {
 
   late CustomerDetailsTable _customerDetails;
 
-  List<CustomerModel> _customers = <CustomerModel>[];
+  // List<CustomerModel> _customers = <CustomerModel>[];
 
   @override
   void initState() {
     super.initState();
-    _customers = getEmployeeData();
-    _customerDetails = CustomerDetailsTable(employees: _customers);
+    // _customers = getEmployeeData();
+    getEmployeeData();
   }
 
   @override
@@ -30,7 +31,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
       appBar: AppBar(
         title: Text('GYMTOGYM'),
       ),
-      body: SfDataGrid(
+      body: customerList.isEmpty?const CircularProgressIndicator(): SfDataGrid(
         source: _customerDetails,
         columns: [
 
@@ -58,20 +59,24 @@ class _CustomersScreenState extends State<CustomersScreen> {
                   n,
                   overflow: TextOverflow.ellipsis,
                 )));
+  } List<CustomerModel> customerList = [];
+  getEmployeeData() {
+    final collectionRef = FirebaseFirestore.instance.collection('userinfo');
+    collectionRef.snapshots().listen((event) {
+      customerList = [];
+      setState(() {
+      });
+      event.docs.forEach((element) {
+        CustomerModel customerModel = CustomerModel.fromMap(element.data());
+        customerList.add(customerModel);
+      });
+      _customerDetails = CustomerDetailsTable(employees: customerList);
+      setState(() {
+
+      });
+    });
+
   }
 }
 
-List<CustomerModel> getEmployeeData() {
-  return [
-    CustomerModel('10001', 'James', 'Project Lead', '20000','20000','20000','20000','20000'),
-    CustomerModel('10002', 'Kathryn', 'Manager', '30000' ,'20000','20000','20000','20000'),
-    CustomerModel('10003', 'Lara', 'Developer', '15000','20000','20000','20000','20000'),
-    CustomerModel('10004', 'Michael', 'Designer', '15000','20000','20000','20000','20000'),
-    CustomerModel('10006', 'Newberry', 'Developer', '15000','20000','20000','20000','20000'),
-    CustomerModel('10007', 'Balnc', 'Developer', '15000','20000','20000','20000','20000'),
-    CustomerModel('10008', 'Perry', 'Developer', '15000','20000','20000','20000','20000'),
-    CustomerModel('10009', 'Gable', 'Developer', '15000','20000','20000','20000','20000'),
-    CustomerModel('10010', 'Grimes', 'Developer', '15000','20000','20000','20000','20000')
-  ];
-}
 
