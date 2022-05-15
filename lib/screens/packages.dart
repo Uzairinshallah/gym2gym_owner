@@ -47,40 +47,42 @@ class PackageScreen extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.indigo.withOpacity(.5),
-                        boxShadow: const [
-                          BoxShadow(color: Colors.greenAccent, spreadRadius: 3),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                Text('For Days: 30'),
-                                Text('Price: 30'),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                Text('Allow Attendance: 30'),
-                                Text('Discount: 30'),
-                              ],
-                            ),
-                            // Align(
-                            //   alignment: Alignment.topRight,
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.only(top: 8.0),
-                            //     child: ButtonWidget(context, 'Update', () {}),
-                            //   ),
-                            // )
+                    child: Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.indigo.withOpacity(.5),
+                          boxShadow: const [
+                            BoxShadow(color: Colors.greenAccent, spreadRadius: 3),
                           ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  Text('For Days: 30'),
+                                  Text('Price: 30'),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  Text('Allow Attendance: 30'),
+                                  Text('Discount: 30'),
+                                ],
+                              ),
+                              // Align(
+                              //   alignment: Alignment.topRight,
+                              //   child: Padding(
+                              //     padding: const EdgeInsets.only(top: 8.0),
+                              //     child: ButtonWidget(context, 'Update', () {}),
+                              //   ),
+                              // )
+                            ],
+                          ),
                         ),
                       ),
                     ),

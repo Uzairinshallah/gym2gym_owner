@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../classes/employees_table.dart';
+import '../main.dart';
 import '../models/employee_details_model.dart';
 
 class EmployeesDetailsScreen extends StatefulWidget {
@@ -26,11 +28,14 @@ class _EmployeesDetailsScreenState extends State<EmployeesDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('GYMTOGYM'),
       ),
       body: SfDataGrid(
+        columnWidthMode: ColumnWidthMode.fill,
         source: _employeeDetails,
         columns: [
           getGridColumn('ID'),
@@ -46,12 +51,18 @@ class _EmployeesDetailsScreenState extends State<EmployeesDetailsScreen> {
 
   GridColumn getGridColumn(String n) {
     return GridColumn(
-            columnName: n,
+        minimumWidth: (kIsWeb) ? screenWidth * .1 : 80,
+        columnName: n,
             label: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                alignment: Alignment.centerRight,
+
+                padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                alignment: Alignment.centerLeft,
                 child:  Text(
                   n,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold
+                  ),
                   overflow: TextOverflow.ellipsis,
                 )));
   }

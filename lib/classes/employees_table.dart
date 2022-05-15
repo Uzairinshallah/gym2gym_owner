@@ -32,7 +32,7 @@ class EmployeeDetailsTable extends DataGridSource {
           return Container(
               alignment: (dataGridCell.columnName == 'id' ||
                   dataGridCell.columnName == 'salary')
-                  ? Alignment.centerRight
+                  ? Alignment.centerLeft
                   : Alignment.centerLeft,
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(

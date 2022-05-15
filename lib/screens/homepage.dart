@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gym2gym_owner/main.dart';
 import 'package:gym2gym_owner/screens/SignupPage.dart';
@@ -16,11 +17,13 @@ class Homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenWidth = MediaQuery.of(context).size.width;
+    screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
           title: Text('GYMTOGYM'),
         ),
-        backgroundColor: CColors.bgColor,
+        // backgroundColor: CColors.bgColor,
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -38,99 +41,102 @@ class Homepage extends StatelessWidget {
                   getContainer('Balance'),
                 ],
               ),
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.teal.withOpacity(.5),
-                    borderRadius: BorderRadius.circular(25),
-                    gradient:  LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      colors: [
-                        CColors.containerCol,
-                        CColors.containerCol,
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.teal.withOpacity(.5),
+                      borderRadius: BorderRadius.circular(25),
+                      gradient:  LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [
+                          CColors.containerCol,
+                          CColors.containerCol,
 
+                        ],
+                      )),
+
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20, bottom: 20),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ButtonWidget(context, "Packages" , (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => PackageScreen()),
+                              );
+                            },),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8, bottom: 8),
+                              child: ButtonWidget(context, "Attendance", (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) =>  AttendanceDetailsScreen()),
+                                );
+                              },),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ButtonWidget(context, "Timing", (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  const TimingScreen()),
+                              );
+                            },),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8, bottom: 8),
+                              child: ButtonWidget(context, "Events", (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const EventsScreen()),
+                                );
+                              },),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ButtonWidget(context, "Accounts", (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  AccountsScreen()),
+                              );
+                            },),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8, bottom: 8),
+                              child: ButtonWidget(context, "Employees", (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const EmployeesDetailsScreen()),
+                                );
+                              },),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8, bottom: 8),
+                              child: ButtonWidget(context, "Customers", (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const CustomersScreen()),
+                                );
+                              },),
+                            ),
+                          ],
+                        ),
                       ],
-                    )),
-
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20, bottom: 20),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ButtonWidget(context, "Packages" , (){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => PackageScreen()),
-                            );
-                          },),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8, bottom: 8),
-                            child: ButtonWidget(context, "Attendance", (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>  AttendanceDetailsScreen()),
-                              );
-                            },),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ButtonWidget(context, "Timing", (){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) =>  const TimingScreen()),
-                            );
-                          },),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8, bottom: 8),
-                            child: ButtonWidget(context, "Events", (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const EventsScreen()),
-                              );
-                            },),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ButtonWidget(context, "Accounts", (){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) =>  AccountsScreen()),
-                            );
-                          },),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8, bottom: 8),
-                            child: ButtonWidget(context, "Employees", (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const EmployeesDetailsScreen()),
-                              );
-                            },),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8, bottom: 8),
-                            child: ButtonWidget(context, "Customers", (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const CustomersScreen()),
-                              );
-                            },),
-                          ),
-                        ],
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
@@ -143,8 +149,12 @@ class Homepage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        width: screenWidth * .45,
-        height: 130,
+        width: (kIsWeb) ? screenWidth * .2 : screenWidth * .45,
+        height: screenHeight * .18,
+
+        constraints: BoxConstraints(
+          minWidth: 200,
+        ),
 
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(35),
@@ -167,9 +177,12 @@ class Homepage extends StatelessWidget {
   }
 
   Widget ButtonWidget(context, String btnText, onTap()) {
-    return SizedBox(
-      width: screenWidth / 2.1,
+    return Container(
+      width: (kIsWeb) ? screenWidth * .4 : screenWidth / 2.1,
       height: 60,
+      // constraints: BoxConstraints(
+      //   minWidth: 200,
+      // ),
       child: ElevatedButton(
         onPressed: () {
           onTap();
@@ -187,6 +200,7 @@ class Homepage extends StatelessWidget {
           child: Container(
             width: screenWidth,
             height: 100,
+
             alignment: Alignment.center,
             child: Row(
               children: [

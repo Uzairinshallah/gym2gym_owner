@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
@@ -28,14 +29,8 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
-    screenHeight = MediaQuery
-        .of(context)
-        .size
-        .height;
+    screenWidth = MediaQuery.of(context).size.width;
+    screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
           title: Text('GYMTOGYM'),
@@ -69,8 +64,8 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                             color: Colors.white54,
                             child: Center(
                                 child: Text(
-                                  'Total Users',
-                                )),
+                              'Total Users',
+                            )),
                           )),
                       Container(
                         height: 100,
@@ -103,18 +98,22 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
               SizedBox(
                 height: 0,
               ),
-              SfDataGrid(source: _employeeAttendance, columns:
-              [
-                GetGridColumn('Attendance', 'Attendee ID', ),
-                GetGridColumn('User', 'User ID'),
-                GetGridColumn('PKG ID', 'PKG ID'),
-                GetGridColumn('Date', 'Date'),
-                GetGridColumn('Charges', 'Charges'),
-
-
-
-
-              ])
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SfDataGrid(
+                    columnWidthMode: ColumnWidthMode.fill,
+                    source: _employeeAttendance,
+                    columns: [
+                      GetGridColumn(
+                        'Attendance',
+                        'Attendee ID',
+                      ),
+                      GetGridColumn('User', 'User ID'),
+                      GetGridColumn('PKG ID', 'PKG ID'),
+                      GetGridColumn('Date', 'Date'),
+                      GetGridColumn('Charges', 'Charges'),
+                    ]),
+              )
             ],
           ),
         ));
@@ -122,19 +121,23 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
 
   GridColumn GetGridColumn(String colName, String name) {
     return GridColumn(
-                  minimumWidth: 80,
-                  columnName: '$colName',
-                  label: Container(
-                    // width: 100,
-                    //   constraints: const BoxConstraints(
-                        // minWidth: 130,
-                      // ),
-                      padding: const EdgeInsets.symmetric(horizontal: 0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        '$name',
-                        overflow: TextOverflow.ellipsis,
-                      )));
+        minimumWidth: (kIsWeb) ? screenWidth * .1 : 80,
+        columnName: '$colName',
+        label: Container(
+            // width: 100,
+            //   constraints: const BoxConstraints(
+            // minWidth: 130,
+            // ),
+            padding: const EdgeInsets.symmetric(horizontal: 0),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              '$name',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+              overflow: TextOverflow.ellipsis,
+            )));
   }
 }
 
