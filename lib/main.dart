@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gym2gym_owner/assets/CColors.dart';
 import 'package:gym2gym_owner/screens/LoginPage.dart';
@@ -16,7 +17,12 @@ late double screenHeight;
 
 
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    // Replace with actual values
+
+  );
   runApp(const MyApp());
 }
 

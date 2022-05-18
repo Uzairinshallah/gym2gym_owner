@@ -1,14 +1,31 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:gym2gym_owner/models/packages_model.dart';
 
 import '../assets/CColors.dart';
-import '../main.dart';
+import '../assets/Functions.dart';
 
 class AddPackage extends StatelessWidget {
   AddPackage({Key? key}) : super(key: key);
+  var pId = TextEditingController();
+  var gymId = TextEditingController();
+  var name = TextEditingController();
+  var packageId = TextEditingController();
+  var type = TextEditingController();
+  var duration = TextEditingController();
+  var additionDate = TextEditingController();
+  var allowedAttendance = TextEditingController();
+  var price = TextEditingController();
+  var stars = TextEditingController();
+  var status = TextEditingController();
   late double screenWidth;
+  late double screenHeight;
+  bool check = true;
+
   @override
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.of(context).size.width;
+    screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text('GYMTOGYM'),
@@ -29,24 +46,23 @@ class AddPackage extends StatelessWidget {
                 ),
               ),
             ),
-
-            Padding(
-                padding: EdgeInsets.only(top: 60),
-                child: getTextField('Name' )),
-            getTextField('Duration' ),
-            getTextField('Price' ),
-            getTextField('Allow Attendance' ),
-            getTextField('Discount' ),
-
+            SizedBox(
+              height: screenHeight * .04,
+            ),
+            getTextField('P Id', pId,  true),
+            getTextField('Gym Id', gymId, true),
+            getTextField('Package Id', packageId, false),
+            getTextField('Type', type, true),
+            getTextField('Duration', duration, true),
+            // getTextField('Addition Date', additionDate),
+            getTextField('Allow Attendance', allowedAttendance, false),
+            getTextField('Price', price, false),
+            getTextField('Stars', stars, false),
+            getTextField('Status', status, true),
             Padding(
               padding: const EdgeInsets.only(top: 30),
-              child: ButtonWidget(context, 'Add Now', () {
-
-              }),
+              child: ButtonWidget(context, 'Add Now', () {addCategory(context);}),
             )
-
-
-
           ],
         ),
       ),
@@ -60,7 +76,6 @@ class AddPackage extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           onTap();
-
         },
         style: ElevatedButton.styleFrom(
             padding: EdgeInsets.zero,
@@ -97,49 +112,84 @@ class AddPackage extends StatelessWidget {
     );
   }
 
+  Padding getTextField(String hint, TextEditingController controller, bool check) {
+    String a = '';
 
-  Padding getTextField(String hint) {
     return Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: 800,
-            ),
-            child: TextFormField(
-              textAlign: TextAlign.left,
-              decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 3, horizontal: 10),
-                  hintText: hint,
-                  labelStyle: const TextStyle(color: Colors.white),
-                  fillColor: Colors.white38,
-                  filled: true,
-                  disabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 2.0,
-                      )),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                    borderSide: const BorderSide(
-                      color: Colors.blueGrey,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: const BorderSide(
-                        color: Colors.blueAccent,
-                        width: 2.0,
-                      ))),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
-            ),
-          ),
-        );
+      padding: const EdgeInsets.all(10.0),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: 800,
+        ),
+        child: TextFormField(
+          controller: controller,
+          textAlign: TextAlign.left,
+          keyboardType: (check) ? TextInputType.text : TextInputType.number,
+          decoration: InputDecoration(
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+              hintText: hint,
+              labelStyle: const TextStyle(color: Colors.white),
+              fillColor: Colors.white38,
+              filled: true,
+              disabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                  borderSide: const BorderSide(
+                    color: Colors.black,
+                    width: 2.0,
+                  )),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15.0),
+                borderSide: const BorderSide(
+                  color: Colors.blueGrey,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                  borderSide: const BorderSide(
+                    color: Colors.blueAccent,
+                    width: 2.0,
+                  ))),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter some text';
+            }
+            return null;
+          },
+        ),
+
+
+      ),
+    );
+  }
+
+  Future<void> addCategory(context) async {
+    final collectionRef =
+        FirebaseFirestore.instance.collection('package').doc();
+    // final pID = collectionRef.id;
+    try {
+      PackagesModel packagesModel = PackagesModel(
+        pId: pId.text,
+        gymId: gymId.text,
+        packageId: int.tryParse(packageId.text) ?? 0,
+        name: name.text,
+        type: type.text,
+        duration: duration.text,
+        allowedAttendance: int.tryParse(allowedAttendance.text) ?? 0,
+        price: int.tryParse(price.text) ?? 0,
+        stars: int.tryParse(stars.text) ?? 0,
+        status: true,
+        additionDate: Timestamp.fromDate(DateTime.now()),
+      );
+
+      await collectionRef.set(packagesModel.toMap());
+      Navigator.pop(context);
+      Functions.showSnackBar(context, 'Banner Added Successfully');
+      Navigator.pop(context);
+    } catch (e) {
+      Navigator.pop(context);
+      Functions.showSnackBar(context, 'Something Went Wrong');
+      print(e.toString());
+    }
   }
 }

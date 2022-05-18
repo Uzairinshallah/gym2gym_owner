@@ -153,7 +153,7 @@ class Homepage extends StatelessWidget {
         height: screenHeight * .18,
 
         constraints: BoxConstraints(
-          minWidth: 200,
+          minWidth: (kIsWeb) ? 200 : 100,
         ),
 
         decoration: BoxDecoration(
@@ -178,7 +178,7 @@ class Homepage extends StatelessWidget {
 
   Widget ButtonWidget(context, String btnText, onTap()) {
     return Container(
-      width: (kIsWeb) ? screenWidth * .4 : screenWidth / 2.1,
+      width: (kIsWeb) ? screenWidth * .4 : screenWidth * .4,
       height: 60,
       // constraints: BoxConstraints(
       //   minWidth: 200,

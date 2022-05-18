@@ -14,16 +14,20 @@ class EmployeesDetailsScreen extends StatefulWidget {
 }
 
 class _EmployeesDetailsScreenState extends State<EmployeesDetailsScreen> {
-
   late EmployeeDetailsTable _employeeDetails;
+  var idController= TextEditingController();
+  var nameController= TextEditingController();
+  var cnicController= TextEditingController();
+  var postController= TextEditingController();
+  var payController= TextEditingController();
 
-  List<EmpDetailsModel> _employees = <EmpDetailsModel>[];
+  List<EmpDetailsModel> empDetailsList = [];
 
   @override
   void initState() {
     super.initState();
-    _employees = getEmployeeData();
-    _employeeDetails = EmployeeDetailsTable(employees: _employees);
+    empDetailsList = getEmployeeData();
+    _employeeDetails = EmployeeDetailsTable(employees: empDetailsList);
   }
 
   @override
@@ -43,43 +47,85 @@ class _EmployeesDetailsScreenState extends State<EmployeesDetailsScreen> {
           getGridColumn('CNIC'),
           getGridColumn('Post'),
           getGridColumn('Pay'),
-
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          showDialog(
+            context: context,
+            builder: (context) => editCategoryBox(),
+          );
+        },
+        child: Icon(Icons.add),
+      ),
     );
+
   }
 
   GridColumn getGridColumn(String n) {
     return GridColumn(
         minimumWidth: (kIsWeb) ? screenWidth * .1 : 80,
         columnName: n,
-            label: Container(
-
-                padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                alignment: Alignment.centerLeft,
-                child:  Text(
-                  n,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                )));
+        label: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 0.0),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              n,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              overflow: TextOverflow.ellipsis,
+            )));
   }
+
+
+  Widget editCategoryBox() {
+    return AlertDialog(
+      title: const Text("Edit Category"),
+      content: Column(
+        children: [
+          getTextField('Id', idController),
+          getTextField('Name', nameController),
+          getTextField('CNIC', cnicController),
+          getTextField('Post', postController),
+          getTextField('Pay', payController),
+
+        ],
+      ),
+      actions: <Widget>[
+        ElevatedButton(
+          child: Text("Done"),
+          onPressed: () async {
+            // addEmployee();
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+  }
+
+  TextFormField getTextField(String hint, TextEditingController controller) {
+    return TextFormField(
+          controller: controller,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            hintText: hint,
+          ),
+        );
+  }
+
+
+
 }
+
 
 
 List<EmpDetailsModel> getEmployeeData() {
   return [
-    EmpDetailsModel('10001', 'James', 'Project Lead', '20000','20000' ),
-    EmpDetailsModel('10002', 'Kathryn', 'Manager', '30000' ,'20000'),
-    EmpDetailsModel('10003', 'Lara', 'Developer', '15000','20000'),
-    EmpDetailsModel('10004', 'Michael', 'Designer', '15000','20000'),
-    EmpDetailsModel('10005', 'Martin', 'Developer', '15000','20000'),
-    EmpDetailsModel('10006', 'Newberry', 'Developer', '15000','20000'),
-    EmpDetailsModel('10007', 'Balnc', 'Developer', '15000','20000'),
-    EmpDetailsModel('10008', 'Perry', 'Developer', '15000','20000'),
-    EmpDetailsModel('10009', 'Gable', 'Developer', '15000','20000'),
-    EmpDetailsModel('10010', 'Grimes', 'Developer', '15000','20000')
+    EmpDetailsModel(
+      id: '10001',
+      name: 'Kathryn',
+      Post: 'high',
+      CNIC: '1231312313',
+      Pay: '131313',
+    ),
   ];
 }

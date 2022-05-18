@@ -1,12 +1,27 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:gym2gym_owner/models/packages_model.dart';
 
 import '../assets/CColors.dart';
 import 'add_package.dart';
 import 'homepage.dart';
 
-class PackageScreen extends StatelessWidget {
+class PackageScreen extends StatefulWidget {
   PackageScreen({Key? key}) : super(key: key);
+
+  @override
+  State<PackageScreen> createState() => _PackageScreenState();
+}
+
+class _PackageScreenState extends State<PackageScreen> {
   late double screenWidth, screenHeight;
+
+  @override
+  void initState() {
+    getData();
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +58,7 @@ class PackageScreen extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-                itemCount: 5,
+                itemCount: packagesModel.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -62,25 +77,19 @@ class PackageScreen extends StatelessWidget {
                             children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Text('For Days: 30'),
-                                  Text('Price: 30'),
+                                children:  [
+                                  Text(packagesModel[index].name),
+                                  Text('Price: ${packagesModel[index].price}'),
                                 ],
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Text('Allow Attendance: 30'),
-                                  Text('Discount: 30'),
+                                children:  [
+                                  Text('Allow Attendance: ${packagesModel[index].allowedAttendance}'),
+                                  Text('Stars: ${packagesModel[index].stars}'),
+
                                 ],
                               ),
-                              // Align(
-                              //   alignment: Alignment.topRight,
-                              //   child: Padding(
-                              //     padding: const EdgeInsets.only(top: 8.0),
-                              //     child: ButtonWidget(context, 'Update', () {}),
-                              //   ),
-                              // )
                             ],
                           ),
                         ),
@@ -139,4 +148,26 @@ class PackageScreen extends StatelessWidget {
       ),
     );
   }
+
+  final _collectionRef =
+  FirebaseFirestore.instance.collection('package');
+
+  List<PackagesModel> packagesModel = [];
+
+  Future<void> getData() async {
+    await _collectionRef.get().then((value) {
+
+      value.docs.forEach((element) {
+        PackagesModel model = PackagesModel.fromMap(element.data());
+        packagesModel.add(model);
+        print(packagesModel);
+      });
+    });
+    setState(() {
+
+    });
+  }
+
+
+
 }
