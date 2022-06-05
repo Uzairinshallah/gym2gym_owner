@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:gym2gym_owner/classes/employees_table.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../assets/CColors.dart';
@@ -16,26 +18,32 @@ class AttendanceDetailsScreen extends StatefulWidget {
 }
 
 class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
-  late AttendanceDetails _employeeAttendance;
 
-  List<EmpAttenModel> _employees = <EmpAttenModel>[];
+  late AttendanceDetails _attendanceDetails;
 
   @override
   void initState() {
-    _employees = getEmployeeData();
-    _employeeAttendance = AttendanceDetails(employees: _employees);
     super.initState();
+    getEmployeeData();
   }
 
   @override
   Widget build(BuildContext context) {
-    screenWidth = MediaQuery.of(context).size.width;
-    screenHeight = MediaQuery.of(context).size.height;
+    screenWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
+    screenHeight = MediaQuery
+        .of(context)
+        .size
+        .height;
     return Scaffold(
         appBar: AppBar(
           title: Text('GYMTOGYM'),
+          backgroundColor: Colors.transparent,
+
         ),
-        backgroundColor: CColors.bgColor,
+        // backgroundColor: CColors.bgColor,
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -64,8 +72,8 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                             color: Colors.white54,
                             child: Center(
                                 child: Text(
-                              'Total Users',
-                            )),
+                                  'Total Users',
+                                )),
                           )),
                       Container(
                         height: 100,
@@ -95,14 +103,12 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 0,
-              ),
+
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: SfDataGrid(
+                child: attendaceList.isEmpty?const CircularProgressIndicator(): SfDataGrid(
                     columnWidthMode: ColumnWidthMode.fill,
-                    source: _employeeAttendance,
+                    source: _attendanceDetails,
                     columns: [
                       GetGridColumn(
                         'Attendance',
@@ -121,37 +127,38 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
 
   GridColumn GetGridColumn(String colName, String name) {
     return GridColumn(
+        width: screenWidth * .35,
         minimumWidth: (kIsWeb) ? screenWidth * .1 : 80,
         columnName: '$colName',
         label: Container(
-            // width: 100,
-            //   constraints: const BoxConstraints(
-            // minWidth: 130,
-            // ),
             padding: const EdgeInsets.symmetric(horizontal: 0),
-            alignment: Alignment.centerLeft,
-            child: Text(
-              '$name',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                '$name',
+                style: TextStyle(
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
-              overflow: TextOverflow.ellipsis,
             )));
   }
-}
 
-List<EmpAttenModel> getEmployeeData() {
-  return [
-    EmpAttenModel('10001', 'James', 'Project Lead', '20000', '2000'),
-    EmpAttenModel('10002', 'Kathryn', 'Manager', '30000', 'wd'),
-    EmpAttenModel('10003', 'Lara', 'Developer', '15000', 'wddw'),
-    EmpAttenModel('10004', 'Michael', 'Designer', '15000', 'wef'),
-    EmpAttenModel('10005', 'Martin', 'Developer', '15000', 'efwef'),
-    EmpAttenModel('10006', 'Newberry', 'Developer', '15000', 'qefwe'),
-    EmpAttenModel('10007', 'Balnc', 'Developer', '15000', 'qwdf'),
-    EmpAttenModel('10008', 'Perry', 'Developer', '15000', 'wefw'),
-    EmpAttenModel('10009', 'Gable', 'Developer', '15000', 'tgr'),
-    EmpAttenModel('10010', 'Grimes', 'Developer', '15000', 'egwrf')
-  ];
+  List<EmpAttenModel> attendaceList = [];
+
+  getEmployeeData() {
+    final collectionRef = FirebaseFirestore.instance.collection('attendance');
+    collectionRef.snapshots().listen((event) {
+      attendaceList = [];
+      setState(() {});
+      event.docs.forEach((element) {
+        EmpAttenModel empAttenModel = EmpAttenModel.fromMap(element.data());
+        attendaceList.add(empAttenModel);
+      });
+      _attendanceDetails = AttendanceDetails(employees: attendaceList);
+      setState(() {
+
+      });
+    });
+  }
+
 }

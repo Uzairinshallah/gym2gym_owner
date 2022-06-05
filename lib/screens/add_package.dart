@@ -29,6 +29,8 @@ class AddPackage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('GYMTOGYM'),
+        backgroundColor: Colors.transparent,
+
       ),
       backgroundColor: CColors.bgColor,
       body: SingleChildScrollView(
@@ -52,6 +54,7 @@ class AddPackage extends StatelessWidget {
             getTextField('P Id', pId,  true),
             getTextField('Gym Id', gymId, true),
             getTextField('Package Id', packageId, false),
+            getTextField('Package Name', name, false),
             getTextField('Type', type, true),
             getTextField('Duration', duration, true),
             // getTextField('Addition Date', additionDate),

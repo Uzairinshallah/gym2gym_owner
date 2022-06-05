@@ -30,6 +30,8 @@ class _PackageScreenState extends State<PackageScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('GYMTOGYM'),
+        backgroundColor: Colors.transparent,
+
       ),
       body: Column(
         children: [

@@ -1,33 +1,31 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gym2gym_owner/assets/CColors.dart';
+import 'package:gym2gym_owner/providers/attendance_provider.dart';
 import 'package:gym2gym_owner/screens/LoginPage.dart';
-
+import 'package:provider/provider.dart';
 
 late double screenWidth;
 late double screenHeight;
-// const Color bgColor = Color(0xFF212332);
-// const Color buttonOne = Color(0xFF2A2D3E);
-// const Color buttonTwo = Color(0xff0e5480);
-// const Color dHeader = Color(0xFF59599c);
-// const Color bgColorTwo = Color(0xFF2A253E);
-// const Color bgColorThree = Color(0xFF597ade);
-// const Color IconColor = Color(0xFFC7C7D4);
-// const Color containerCol = Color(0xFF003366);
 
-
-
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    // Replace with actual values
+      // Replace with actual values
 
-  );
-  runApp(const MyApp());
+      );
+
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<AttendanceProvider>(
+        create: (_) => AttendanceProvider(),
+      ),
+    ],
+    child: const MyApp(),
+  ));
 }
 
- var dHeader =  const Color(0xFF59599c);
-
+var dHeader = const Color(0xFF59599c);
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -35,12 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(
-          primaryTextTheme: TextTheme(bodyText1: TextStyle(color: Colors.pink)),
-          primarySwatch: Colors.indigo,
-          textTheme: TextTheme(bodyText1: TextStyle(color: Colors.white), ),
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
+        theme: ThemeData(scaffoldBackgroundColor: const Color(0xFFEFEFEF)),
         home: Signin());
   }
 }

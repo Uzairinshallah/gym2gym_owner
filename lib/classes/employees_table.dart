@@ -6,6 +6,7 @@ import '../models/employee_details_model.dart';
 
 class EmployeeDetailsTable extends DataGridSource {
   EmployeeDetailsTable({required List<EmpDetailsModel> employees}) {
+
     dataGridRows = employees
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
       DataGridCell<String>(columnName: 'id', value: dataGridRow.id),

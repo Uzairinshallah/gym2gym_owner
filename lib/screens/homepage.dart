@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:gym2gym_owner/main.dart';
 import 'package:gym2gym_owner/screens/SignupPage.dart';
 import 'package:gym2gym_owner/screens/accounts.dart';
-import 'package:gym2gym_owner/screens/customersDetails.dart';
+import 'package:gym2gym_owner/screens/customers_details.dart';
 import 'package:gym2gym_owner/screens/employees_details.dart';
 import 'package:gym2gym_owner/screens/packages.dart';
 import 'package:gym2gym_owner/screens/timing.dart';
 
 import '../assets/CColors.dart';
 import 'attendance_details.dart';
+import 'attendance_options.dart';
 import 'events.dart';
 
 class Homepage extends StatelessWidget {
@@ -22,11 +23,13 @@ class Homepage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text('GYMTOGYM'),
+          backgroundColor: Colors.transparent,
         ),
-        // backgroundColor: CColors.bgColor,
+        backgroundColor: CColors.bgColor,
         body: SingleChildScrollView(
           child: Column(
             children: [
+              SizedBox(height: 10,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -75,7 +78,7 @@ class Homepage extends StatelessWidget {
                               child: ButtonWidget(context, "Attendance", (){
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) =>  AttendanceDetailsScreen()),
+                                  MaterialPageRoute(builder: (context) =>  AttendanceOptions()),
                                 );
                               },),
                             ),
@@ -169,7 +172,7 @@ class Homepage extends StatelessWidget {
         child: Center(
           child: Text(
             heading,
-            style: TextStyle(color: Colors.white, fontSize: 16),
+            style: TextStyle(color: Colors.white, fontSize: 13),
           ),
         ),
       ),
@@ -180,9 +183,6 @@ class Homepage extends StatelessWidget {
     return Container(
       width: (kIsWeb) ? screenWidth * .4 : screenWidth * .4,
       height: 60,
-      // constraints: BoxConstraints(
-      //   minWidth: 200,
-      // ),
       child: ElevatedButton(
         onPressed: () {
           onTap();
@@ -203,18 +203,19 @@ class Homepage extends StatelessWidget {
 
             alignment: Alignment.center,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.all(4.0),
                   child: Icon(
                     Icons.history_rounded,
-                    color: Colors.deepOrange,
-                    size: 40.0,
+                    color: CColors.bgColor,
+                    size: 20.0,
                   ),
                 ),
                 Text(
                   btnText,
-                  style: TextStyle(fontSize: 15, fontStyle: FontStyle.italic),
+                  style: TextStyle(fontSize: 11, fontStyle: FontStyle.italic),
                 ),
               ],
             ),

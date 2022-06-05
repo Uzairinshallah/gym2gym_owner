@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -21,13 +22,12 @@ class _EmployeesDetailsScreenState extends State<EmployeesDetailsScreen> {
   var postController= TextEditingController();
   var payController= TextEditingController();
 
-  List<EmpDetailsModel> empDetailsList = [];
+  late EmployeeDetailsTable _employeeDetailsTable;
 
   @override
   void initState() {
     super.initState();
-    empDetailsList = getEmployeeData();
-    _employeeDetails = EmployeeDetailsTable(employees: empDetailsList);
+    getEmployeeData();
   }
 
   @override
@@ -37,10 +37,12 @@ class _EmployeesDetailsScreenState extends State<EmployeesDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('GYMTOGYM'),
+        backgroundColor: Colors.transparent,
+
       ),
-      body: SfDataGrid(
+      body: employeesList.isEmpty?const CircularProgressIndicator():SfDataGrid(
         columnWidthMode: ColumnWidthMode.fill,
-        source: _employeeDetails,
+        source: _employeeDetailsTable,
         columns: [
           getGridColumn('ID'),
           getGridColumn('Name'),
@@ -112,20 +114,29 @@ class _EmployeesDetailsScreenState extends State<EmployeesDetailsScreen> {
         );
   }
 
+  List<EmpDetailsModel> employeesList = [];
+  getEmployeeData() {
+    final collectionRef = FirebaseFirestore.instance.collection('employees');
+    collectionRef.snapshots().listen((event) {
+      employeesList = [];
+      setState(() {
+      });
+      event.docs.forEach((element) {
+        EmpDetailsModel empDetailsModel = EmpDetailsModel.fromMap(element.data());
+        employeesList.add(empDetailsModel);
+      });
+      _employeeDetailsTable = EmployeeDetailsTable(employees: employeesList);
+      setState(() {
+
+      });
+    });
+
+  }
 
 
 }
 
 
 
-List<EmpDetailsModel> getEmployeeData() {
-  return [
-    EmpDetailsModel(
-      id: '10001',
-      name: 'Kathryn',
-      Post: 'high',
-      CNIC: '1231312313',
-      Pay: '131313',
-    ),
-  ];
-}
+
+

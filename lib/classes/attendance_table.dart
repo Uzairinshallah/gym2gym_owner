@@ -28,14 +28,17 @@ class AttendanceDetails extends DataGridSource {
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
       return Container(
-          alignment: (dataGridCell.columnName == 'id' ||
-                  dataGridCell.columnName == 'salary')
-              ? Alignment.centerRight
-              : Alignment.centerLeft,
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(
-            dataGridCell.value.toString(),
-            overflow: TextOverflow.ellipsis,
+          alignment : Alignment.centerLeft,
+          // padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              // dataGridCell.value.toString(),
+              'aaaaaaaaa',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 12),
+
+            ),
           ));
     }).toList());
   }

@@ -8,7 +8,10 @@ class EventsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('GYMTOGYM'),
+        backgroundColor: Colors.transparent,
+
       ),
+
       body: Text('Events'),
     );
   }
