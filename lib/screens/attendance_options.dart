@@ -91,7 +91,7 @@ class _AttendanceOptionsState extends State<AttendanceOptions> {
                     setState(() {
                       model.reg_date = date;
                       print(date);
-                      if(date.toString() == null){
+                      if(model.reg_date != null){
                         model.checkDate(true);
                         print('date done');
                       }

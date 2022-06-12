@@ -50,12 +50,13 @@ class Signin extends StatelessWidget {
                           style: TextStyle(color: Colors.white, fontSize: 12),
                           textAlign: TextAlign.left,
                           decoration: InputDecoration(
-
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 3, horizontal: 10),
                               labelText: 'Owner ID',
-                              labelStyle:  TextStyle(
-                                  color: Colors.white, fontFamily: 'pp' , fontSize: 12),
+                              labelStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'pp',
+                                  fontSize: 12),
                               fillColor: CColors.bgTF,
                               filled: true,
                               disabledBorder: OutlineInputBorder(
@@ -69,15 +70,13 @@ class Signin extends StatelessWidget {
                                 borderSide: BorderSide(
                                   color: CColors.textColor,
                                   width: 1,
-
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10.0),
-                                  borderSide:  BorderSide(
+                                  borderSide: BorderSide(
                                     color: CColors.textColor,
                                     width: 1,
-
                                   ))),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -91,7 +90,10 @@ class Signin extends StatelessWidget {
                     // getSizedBox(1),
 
                     Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 15,),
+                      padding: const EdgeInsets.only(
+                        left: 15,
+                        right: 15,
+                      ),
                       child: ConstrainedBox(
                         constraints: BoxConstraints(
                           maxWidth: 800,
@@ -106,9 +108,10 @@ class Signin extends StatelessWidget {
                               contentPadding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 5),
                               labelText: 'Password',
-
-                              labelStyle:  TextStyle(
-                                  color: Colors.white, fontFamily: 'pp', fontSize: 12),
+                              labelStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'pp',
+                                  fontSize: 12),
                               fillColor: CColors.bgTF,
                               filled: true,
                               disabledBorder: OutlineInputBorder(
@@ -126,7 +129,7 @@ class Signin extends StatelessWidget {
                               ),
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10.0),
-                                  borderSide:  BorderSide(
+                                  borderSide: BorderSide(
                                     color: CColors.textColor,
                                     width: 1,
                                   ))),
@@ -141,14 +144,18 @@ class Signin extends StatelessWidget {
                     ),
                     getSizedBox(screenWidth * .125),
                     Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 15,),
-
+                      padding: const EdgeInsets.only(
+                        left: 15,
+                        right: 15,
+                      ),
                       child: SizedBox(
                         height: 45,
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(
-                                context, MaterialPageRoute(builder: (context) => Homepage()));
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Homepage()));
                           },
                           style: ElevatedButton.styleFrom(
                               padding: EdgeInsets.zero,
@@ -156,8 +163,10 @@ class Signin extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(40))),
                           child: Ink(
                             decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                    colors: [CColors.buttonOne, CColors.buttonTwo]),
+                                gradient: LinearGradient(colors: [
+                                  CColors.buttonOne,
+                                  CColors.buttonTwo
+                                ]),
                                 borderRadius: BorderRadius.circular(10)),
                             child: Container(
                               width: (kIsWeb) ? screenWidth * .3 : screenWidth,
@@ -165,9 +174,8 @@ class Signin extends StatelessWidget {
                               alignment: Alignment.center,
                               child: const Text(
                                 'SIGN IN',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: 'pp'),
+                                style:
+                                    TextStyle(fontSize: 12, fontFamily: 'pp'),
                               ),
                             ),
                           ),
@@ -186,9 +194,12 @@ class Signin extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 15, left: 15),
                         child: InkWell(
                           onTap: () {},
-                          child:  Text(
+                          child: Text(
                             'Forgot Password ',
-                            style: TextStyle(fontFamily: 'pp', color: CColors.buttonOne, fontSize: 10),
+                            style: TextStyle(
+                                fontFamily: 'pp',
+                                color: CColors.buttonOne,
+                                fontSize: 10),
                           ),
                         ),
                       ),
@@ -198,33 +209,32 @@ class Signin extends StatelessWidget {
                     RichText(
                       text: TextSpan(
                           text: 'Don\'t have an account?',
-                          style: TextStyle(
-                              color: CColors.textColor, fontSize: 12),
+                          style:
+                              TextStyle(color: CColors.textColor, fontSize: 12),
                           children: <TextSpan>[
-                            TextSpan(text: ' SIGN UP',
+                            TextSpan(
+                                text: ' SIGN UP',
                                 style: TextStyle(
                                     color: CColors.buttonOne, fontSize: 12),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     // navigate to desired screen
-                                  }
-                            )
-                          ]
-                      ),
+                                  })
+                          ]),
                     ),
 
-                // OutlinedButton(
-                //   onPressed: (){
-                //
-                //   },
-                //   style: OutlinedButton.styleFrom(
-                //     shape: RoundedRectangleBorder(
-                //         borderRadius: BorderRadius.circular(20)),
-                //     side: BorderSide(width: 1.0, color: CColors.buttonTwo),
-                //   ),
-                //
-                //   child:  Text("SignUp", style: TextStyle(color: Colors.white),),
-                // ),
+                    // OutlinedButton(
+                    //   onPressed: (){
+                    //
+                    //   },
+                    //   style: OutlinedButton.styleFrom(
+                    //     shape: RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.circular(20)),
+                    //     side: BorderSide(width: 1.0, color: CColors.buttonTwo),
+                    //   ),
+                    //
+                    //   child:  Text("SignUp", style: TextStyle(color: Colors.white),),
+                    // ),
                     // SizedBox(
                     //   height: 45,
                     //   child: OutlinedButton(

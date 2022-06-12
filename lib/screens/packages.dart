@@ -31,13 +31,13 @@ class _PackageScreenState extends State<PackageScreen> {
       appBar: AppBar(
         title: Text('GYMTOGYM'),
         backgroundColor: Colors.transparent,
-
       ),
+      backgroundColor: CColors.bgColor,
       body: Column(
         children: [
           Container(
             width: screenWidth,
-            color: Colors.grey,
+            color: CColors.bgColorTwo,
             child: const Padding(
               padding: EdgeInsets.only(top: 10, bottom: 10),
               child: Text(
@@ -46,17 +46,6 @@ class _PackageScreenState extends State<PackageScreen> {
                 style: TextStyle(color: Colors.white),
               ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ButtonWidget(context, 'Packages', () {}),
-              Padding(
-                padding: const EdgeInsets.only(top: 12, bottom: 12),
-                child: ButtonWidget(context, 'Sold', () {}),
-              ),
-              ButtonWidget(context, 'Search', () {}),
-            ],
           ),
           Expanded(
             child: ListView.builder(
@@ -68,31 +57,33 @@ class _PackageScreenState extends State<PackageScreen> {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          color: Colors.indigo.withOpacity(.5),
+                          color: CColors.buttonOne,
                           boxShadow: const [
-                            BoxShadow(color: Colors.greenAccent, spreadRadius: 3),
+                            BoxShadow(color: Colors.white, spreadRadius: 1),
                           ],
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children:  [
-                                  Text(packagesModel[index].name),
-                                  Text('Price: ${packagesModel[index].price}'),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children:  [
-                                  Text('Allow Attendance: ${packagesModel[index].allowedAttendance}'),
-                                  Text('Stars: ${packagesModel[index].stars}'),
+                        child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                getRichText(
+                                    index, 'Name', packagesModel[index].name),
+                                getRichText(index, 'Price',
+                                    packagesModel[index].price.toString()),
+                                getRichText(
+                                    index,
+                                    'Allow Attendance',
+                                    packagesModel[index]
+                                        .allowedAttendance
+                                        .toString()),
 
-                                ],
-                              ),
-                            ],
+
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -105,13 +96,14 @@ class _PackageScreenState extends State<PackageScreen> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: FloatingActionButton(
+                backgroundColor: Colors.white,
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => AddPackage()),
                   );
                 },
-                child: Icon(Icons.add),
+                child: Icon(Icons.add, color: CColors.bgColor,),
               ),
             ),
           ),
@@ -120,9 +112,29 @@ class _PackageScreenState extends State<PackageScreen> {
     );
   }
 
+  Widget getRichText(int index, String name, String detail) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+            width: screenWidth * .42,
+            child: Text(
+              name,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15),
+            )),
+        Text(detail, style: TextStyle(
+            color: CColors.bgColor,
+            ),),
+      ],
+    );
+  }
+
   Widget ButtonWidget(context, String btnText, onTap()) {
     return SizedBox(
-      width: screenWidth * .3,
+      width: screenWidth * .8,
       height: 44,
       child: ElevatedButton(
         onPressed: () {
@@ -151,25 +163,18 @@ class _PackageScreenState extends State<PackageScreen> {
     );
   }
 
-  final _collectionRef =
-  FirebaseFirestore.instance.collection('package');
+  final _collectionRef = FirebaseFirestore.instance.collection('package');
 
   List<PackagesModel> packagesModel = [];
 
   Future<void> getData() async {
     await _collectionRef.get().then((value) {
-
       value.docs.forEach((element) {
         PackagesModel model = PackagesModel.fromMap(element.data());
         packagesModel.add(model);
         print(packagesModel);
       });
     });
-    setState(() {
-
-    });
+    setState(() {});
   }
-
-
-
 }

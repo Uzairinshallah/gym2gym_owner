@@ -42,6 +42,7 @@ dependencies:
   get: ^4.6.1
   firebase_database: ^9.0.15
   provider: ^6.0.3
+  rich_text_widget: ^0.2.7
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

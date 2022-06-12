@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
+import '../assets/CColors.dart';
 import '../classes/employees_table.dart';
 import '../main.dart';
 import '../models/employee_details_model.dart';
@@ -35,10 +36,11 @@ class _EmployeesDetailsScreenState extends State<EmployeesDetailsScreen> {
     screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      // backgroundColor: CColors.bgColor,
       appBar: AppBar(
+        centerTitle: true,
         title: Text('GYMTOGYM'),
         backgroundColor: Colors.transparent,
-
       ),
       body: employeesList.isEmpty?const CircularProgressIndicator():SfDataGrid(
         columnWidthMode: ColumnWidthMode.fill,
@@ -52,6 +54,7 @@ class _EmployeesDetailsScreenState extends State<EmployeesDetailsScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: CColors.buttonOne,
         onPressed: (){
           showDialog(
             context: context,
@@ -73,7 +76,7 @@ class _EmployeesDetailsScreenState extends State<EmployeesDetailsScreen> {
             alignment: Alignment.centerLeft,
             child: Text(
               n,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
               overflow: TextOverflow.ellipsis,
             )));
   }

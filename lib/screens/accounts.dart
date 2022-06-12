@@ -16,13 +16,13 @@ class AccountsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('GYMTOGYM'),
         backgroundColor: Colors.transparent,
-
       ),
+      backgroundColor: CColors.bgColor,
       body: Column(
         children: [
           Container(
             width: screenWidth,
-            color: Colors.grey,
+            color: CColors.bgColorTwo,
             child: const Padding(
               padding: EdgeInsets.only(top: 10, bottom: 10),
               child: Text(
