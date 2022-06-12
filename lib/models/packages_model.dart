@@ -30,7 +30,7 @@ class PackagesModel {
   Map<String, dynamic> toMap() {
     return {
       'pId': this.pId,
-      'gymIDd': this.gymId,
+      'gymId': this.gymId,
       'name': this.name,
       'packageId': this.packageId,
       'type': this.type,

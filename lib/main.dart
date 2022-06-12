@@ -1,13 +1,19 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gym2gym_owner/assets/CColors.dart';
+<<<<<<< HEAD
 import 'package:gym2gym_owner/controller/AuthController.dart';
 import 'package:gym2gym_owner/screens/LoginPage.dart';
 import 'package:gym2gym_owner/screens/wrapper.dart';
+=======
+import 'package:gym2gym_owner/providers/attendance_provider.dart';
+import 'package:gym2gym_owner/screens/LoginPage.dart';
+>>>>>>> 4c35377f506ad5af9f595bbaae7175b1d49f92b8
 import 'package:provider/provider.dart';
 
 late double screenWidth;
 late double screenHeight;
+<<<<<<< HEAD
 // const Color bgColor = Color(0xFF212332);
 // const Color buttonOne = Color(0xFF2A2D3E);
 // const Color buttonTwo = Color(0xff0e5480);
@@ -16,11 +22,14 @@ late double screenHeight;
 // const Color bgColorThree = Color(0xFF597ade);
 // const Color IconColor = Color(0xFFC7C7D4);
 // const Color containerCol = Color(0xFF003366);
+=======
+>>>>>>> 4c35377f506ad5af9f595bbaae7175b1d49f92b8
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       // Replace with actual values
+<<<<<<< HEAD
       options: const FirebaseOptions(
     apiKey: "AIzaSyBlWQHv9P2BMxGXAwVKEZOGJjOfxXzSgNg",
     authDomain: "gymtogym-e05b1.firebaseapp.com",
@@ -31,6 +40,19 @@ void main() async {
     measurementId: "G-RKFPRC4C2Q",
   ));
   runApp(const MyApp());
+=======
+
+      );
+
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<AttendanceProvider>(
+        create: (_) => AttendanceProvider(),
+      ),
+    ],
+    child: const MyApp(),
+  ));
+>>>>>>> 4c35377f506ad5af9f595bbaae7175b1d49f92b8
 }
 
 var dHeader = const Color(0xFF59599c);
@@ -40,6 +62,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return (MultiProvider(
       providers: [
         Provider<AuthService>(
@@ -58,5 +81,11 @@ class MyApp extends StatelessWidget {
           ),
           home: const Wrapper()),
     ));
+=======
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+        theme: ThemeData(scaffoldBackgroundColor: const Color(0xFFEFEFEF)),
+        home: Signin());
+>>>>>>> 4c35377f506ad5af9f595bbaae7175b1d49f92b8
   }
 }

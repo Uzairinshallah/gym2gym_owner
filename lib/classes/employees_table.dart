@@ -6,9 +6,10 @@ import '../models/employee_details_model.dart';
 
 class EmployeeDetailsTable extends DataGridSource {
   EmployeeDetailsTable({required List<EmpDetailsModel> employees}) {
+
     dataGridRows = employees
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
-      DataGridCell<String>(columnName: 'id', value: dataGridRow.id),
+      DataGridCell<String>(columnName: 'id', value: dataGridRow.id, ),
       DataGridCell<String>(columnName: 'name', value: dataGridRow.name),
       DataGridCell<String>(
           columnName: 'CNIC', value: dataGridRow.CNIC),
@@ -38,6 +39,7 @@ class EmployeeDetailsTable extends DataGridSource {
               child: Text(
                 dataGridCell.value.toString(),
                 overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: Colors.white),
               ));
         }).toList());
   }

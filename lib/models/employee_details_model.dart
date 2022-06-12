@@ -20,11 +20,11 @@ class EmpDetailsModel {
 
   factory EmpDetailsModel.fromMap(Map<String, dynamic> map) {
     return EmpDetailsModel(
-      id: map['id'] as String,
-      name: map['name'] as String,
-      CNIC: map['CNIC'] as String,
-      Post: map['Post'] as String,
-      Pay: map['Pay'] as String,
+      id: map['id'],
+      name: map['name'],
+      CNIC: map['CNIC'],
+      Post: map['Post'],
+      Pay: map['Pay'],
     );
   }
 }
