@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gym2gym_owner/classes/customers_table.dart';
 import 'package:gym2gym_owner/main.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import '../assets/CColors.dart';
 import '../models/customer_details_model.dart';
 
 class CustomersScreen extends StatefulWidget {
@@ -24,7 +25,9 @@ class _CustomersScreenState extends State<CustomersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CColors.bgColor,
       appBar: AppBar(
+        centerTitle: true,
         title: Text('GYMTOGYM'),
         backgroundColor: Colors.transparent,
       ),
@@ -55,6 +58,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
               child: Text(
                 n,
                 overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: Colors.white),
               ),
             )));
   }

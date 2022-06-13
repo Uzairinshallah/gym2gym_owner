@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import '../assets/CColors.dart';
 import '../models/customer_details_model.dart';
 
 class CustomerDetailsTable extends DataGridSource {
@@ -28,7 +29,16 @@ class CustomerDetailsTable extends DataGridSource {
 
   @override
   DataGridRowAdapter? buildRow(DataGridRow row) {
+    Color getBackgroundColor() {
+      int index = effectiveRows.indexOf(row);
+      if (index % 2 == 0) {
+        return CColors.buttonOne.withOpacity(.6);
+      } else {
+        return CColors.buttonOne.withOpacity(.9);
+      }
+    }
     return DataGridRowAdapter(
+        color: getBackgroundColor(),
         cells: row.getCells().map<Widget>((dataGridCell) {
       return Container(
           alignment : Alignment.centerLeft,
@@ -36,7 +46,8 @@ class CustomerDetailsTable extends DataGridSource {
           child: Text(
             dataGridCell.value.toString(),
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 12),
+            style: TextStyle(fontSize: 12, color: Colors.white),
+
           ));
     }).toList());
   }

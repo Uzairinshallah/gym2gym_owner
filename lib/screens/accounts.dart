@@ -70,9 +70,9 @@ class AccountsScreen extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        color: Colors.indigo.withOpacity(.5),
+                        color: CColors.buttonOne,
                         boxShadow: const [
-                          BoxShadow(color: Colors.greenAccent, spreadRadius: 3),
+                          BoxShadow(color: Colors.white, spreadRadius: 1),
                         ],
                       ),
                       child: Padding(

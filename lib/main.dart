@@ -21,6 +21,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       // Replace with actual values
+      name: 'gym2gym_owner',
       options: const FirebaseOptions(
     apiKey: "AIzaSyBlWQHv9P2BMxGXAwVKEZOGJjOfxXzSgNg",
     authDomain: "gymtogym-e05b1.firebaseapp.com",
@@ -34,7 +35,6 @@ void main() async {
 }
 
 var dHeader = const Color(0xFF59599c);
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primaryTextTheme:
                 const TextTheme(bodyText1: TextStyle(color: Colors.pink)),

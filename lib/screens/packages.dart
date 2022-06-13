@@ -30,6 +30,7 @@ class _PackageScreenState extends State<PackageScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('GYMTOGYM'),
+        centerTitle: true,
         backgroundColor: Colors.transparent,
       ),
       backgroundColor: CColors.bgColor,
@@ -80,8 +81,10 @@ class _PackageScreenState extends State<PackageScreen> {
                                     packagesModel[index]
                                         .allowedAttendance
                                         .toString()),
-
-
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ButtonWidget(context, 'Activate Package', () {}),
+                                )
                               ],
                             ),
                           ),
@@ -103,7 +106,10 @@ class _PackageScreenState extends State<PackageScreen> {
                     MaterialPageRoute(builder: (context) => AddPackage()),
                   );
                 },
-                child: Icon(Icons.add, color: CColors.bgColor,),
+                child: Icon(
+                  Icons.add,
+                  color: CColors.bgColor,
+                ),
               ),
             ),
           ),
@@ -120,21 +126,24 @@ class _PackageScreenState extends State<PackageScreen> {
             width: screenWidth * .42,
             child: Text(
               name,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 15),
             )),
-        Text(detail, style: TextStyle(
+        Text(
+          detail,
+          style: TextStyle(
             color: CColors.bgColor,
-            ),),
+          ),
+        ),
       ],
     );
   }
 
   Widget ButtonWidget(context, String btnText, onTap()) {
     return SizedBox(
-      width: screenWidth * .8,
+      // width: screenWidth * .8,
       height: 44,
       child: ElevatedButton(
         onPressed: () {
@@ -146,8 +155,7 @@ class _PackageScreenState extends State<PackageScreen> {
                 borderRadius: BorderRadius.circular(15))),
         child: Ink(
           decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [CColors.buttonTwo, CColors.buttonOne]),
+              color: CColors.bgColor,
               borderRadius: BorderRadius.circular(15)),
           child: Container(
             width: screenWidth,
@@ -155,7 +163,7 @@ class _PackageScreenState extends State<PackageScreen> {
             alignment: Alignment.center,
             child: Text(
               btnText,
-              style: TextStyle(fontSize: 15, fontStyle: FontStyle.italic),
+              style: TextStyle(fontSize: 15,),
             ),
           ),
         ),

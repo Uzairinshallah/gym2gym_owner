@@ -247,8 +247,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.3"
-<<<<<<< HEAD
-=======
   rich_text_widget:
     dependency: "direct main"
     description:
@@ -256,7 +254,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.7"
->>>>>>> 4c35377f506ad5af9f595bbaae7175b1d49f92b8
   sky_engine:
     dependency: transitive
     description: flutter
@@ -296,22 +293,14 @@ packages:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "20.1.59"
-=======
-    version: "20.1.58+1"
->>>>>>> 4c35377f506ad5af9f595bbaae7175b1d49f92b8
   syncfusion_flutter_datagrid:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_datagrid
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "20.1.59"
-=======
-    version: "20.1.58"
->>>>>>> 4c35377f506ad5af9f595bbaae7175b1d49f92b8
   term_glyph:
     dependency: transitive
     description:
@@ -342,8 +331,4 @@ packages:
     version: "2.1.2"
 sdks:
   dart: ">=2.17.0-0 <3.0.0"
-<<<<<<< HEAD
-  flutter: ">=1.16.0"
-=======
   flutter: ">=1.20.0"
->>>>>>> 4c35377f506ad5af9f595bbaae7175b1d49f92b8

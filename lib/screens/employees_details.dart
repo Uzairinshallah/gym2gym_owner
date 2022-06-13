@@ -36,7 +36,7 @@ class _EmployeesDetailsScreenState extends State<EmployeesDetailsScreen> {
     screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      // backgroundColor: CColors.bgColor,
+      backgroundColor: CColors.bgColor,
       appBar: AppBar(
         centerTitle: true,
         title: Text('GYMTOGYM'),
@@ -69,6 +69,7 @@ class _EmployeesDetailsScreenState extends State<EmployeesDetailsScreen> {
 
   GridColumn getGridColumn(String n) {
     return GridColumn(
+        width: screenWidth * .35,
         minimumWidth: (kIsWeb) ? screenWidth * .1 : 80,
         columnName: n,
         label: Container(
